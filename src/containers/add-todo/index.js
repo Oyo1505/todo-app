@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const arrayNames = ['Bob', 'Martin', 'Pierre'];
 const arrayDescriptions = ['etre ou ne pas etre', 'Viva la revolution', 'Partir c est mourrir un peur'];
-
+  const todos = [];
 class AddTodo extends React.Component {
 
     constructor(props) {
@@ -48,11 +48,12 @@ class AddTodo extends React.Component {
     setRandomTodo = () => {
         const randomName = this.getRandomName(arrayNames);
         const randomDesc = this.getRandomDescription(arrayDescriptions);
-        const date = new Date();
         const todo = this.state.todo;
+        const date = new Date();
+        date.getDate();
         todo['name'] = randomName;
         todo['description'] = randomDesc;
-        todo['date'] = date.getDate();
+        todo['date'] = date;
         this.setState({ todo: todo });
         this.props.addTodo(todo)
 
@@ -60,9 +61,7 @@ class AddTodo extends React.Component {
     componentDidMount = () => {
 
         const todo = this.setRandomTodo();
-    
         this.setState({ todo: { name: '', description: '', date: '' } })
-
 
     }
     onSubmit = (event) => {

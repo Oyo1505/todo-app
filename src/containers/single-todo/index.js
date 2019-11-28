@@ -7,6 +7,9 @@ import { getTodosByVisibilityFilter } from "../../actions/selectors";
 import { VISIBILITY_FILTERS } from "../../constants";
 import { connect } from 'react-redux';
 import './single-todo.css';
+
+  const todos = [];
+
 class SingleTodo extends React.Component {
 
 	constructor(props) {
@@ -21,8 +24,8 @@ class SingleTodo extends React.Component {
 		const req = await fetch(`http://aws.random.cat/meow`)
         const res = await req.json();
         this.setState({image:res.file})
-        const todos = [];
-        const todo = this.state.todo;
+      
+        const todo = this.state.todo.content;
         todos.push(todo)
          const todos_json = JSON.stringify(todos);
         localStorage.setItem("todos", todos_json)
