@@ -6,24 +6,6 @@ import {connect} from 'react-redux';
 
 class ListTodo extends React.Component{
 	
-    constructor(props) {
-        super(props)
-
-        this.state = {
-          todos:[]
-        }
-    }
-	/*shouldComponentUpdate = (nextProps) => {
-		if(this.props.todos !== nextProps.todos){
-			console.log(nextProps.todos)
-			const todos = JSON.stringify(this.props.todos);
-			console.log(todos)
-        	localStorage.setItem("todos", todos);
-
-			return true;
-		}
-		return false;
-	}*/
 
 	componentDidMount =()=>{
 
@@ -38,7 +20,8 @@ class ListTodo extends React.Component{
 		const todos = this.props.todos;
 		
 		return(
-			<div>ListTodo
+			<div>
+			<h4>ListTodo</h4>
 				{ todos && todos.length ?
 					todos.map(todo => {
 	
