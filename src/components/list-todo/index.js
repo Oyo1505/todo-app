@@ -18,13 +18,11 @@ class ListTodo extends React.Component{
 	render(){
 
 		const todos = this.props.todos;
-		
 		return(
 			<div>
 			<h4>ListTodo</h4>
 				{ todos && todos.length ?
 					todos.map(todo => {
-	
 					return <Todo key={todo.id} id={todo.id} />
 				})
 				: 

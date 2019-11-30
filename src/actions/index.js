@@ -10,6 +10,14 @@ export const addTodo = content => ({
   		content
   }
 });
+
+export const updateTodo = content => ({
+  type: types.UPDATE_TODO_SUCCESS,
+   payload: {
+      id: nextTodoId,
+      content
+  }
+});
 export const toggleTodo = id => ({
   type: types.TOGGLE_TODO,
   payload: { id }

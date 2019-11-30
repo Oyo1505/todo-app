@@ -18,6 +18,19 @@ export default function todosReducer(state = initialState, action) {
         }
       };
     }
+    case types.UPDATE_TODO_SUCCESS: {
+     const { id, content } = action.payload;
+      return {
+        ...state,
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            content,
+            completed: state.byIds[id].completed
+          }
+        }
+      };
+    }
      case types.TOGGLE_TODO: {
       const { id } = action.payload;
       return {

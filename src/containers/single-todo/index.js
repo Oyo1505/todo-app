@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import cx from "classnames";
-import { deleteTodo, toggleTodo } from '../../actions/index'
+import { deleteTodo, toggleTodo, updateTodo } from '../../actions/index'
 import { getTodosByVisibilityFilter } from "../../actions/selectors";
 import { VISIBILITY_FILTERS } from "../../constants";
 import { connect } from 'react-redux';
@@ -45,9 +45,13 @@ class SingleTodo extends React.Component {
 		this.setState({todo})
 
 	}
-	onCheckTodo =(event)=> {
 
+	onSubmit = () => {
+		const todo = this.state.todo;
+		this.props.updateTodo(todo)
+		this.showModal();
 	}
+
 	showModal = (event) => {
 		this.setState({isHide: !this.state.isHide});
 	}
@@ -77,8 +81,8 @@ class SingleTodo extends React.Component {
 			          <Button variant="secondary" onClick={(e) => this.props.toggleTodo(this.state.todo.id)}>
 			        	  { this.props.todo.completed ? 'in progress' : ' Done' }  
 			          </Button>
-			          <Button variant="primary" onClick={this.showModal}>
-			            Close
+			          <Button variant="primary" onClick={this.onSubmit}>
+			            Update
 			          </Button>
 			        </Modal.Footer>
 			      </Modal>
@@ -112,4 +116,4 @@ function mapStateToProps(state, ownProps) {
 
 	return {todo: todo};
 }
-export default connect(mapStateToProps, {deleteTodo, toggleTodo})(SingleTodo);
+export default connect(mapStateToProps, {deleteTodo, toggleTodo, updateTodo})(SingleTodo);
