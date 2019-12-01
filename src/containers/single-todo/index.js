@@ -8,7 +8,7 @@ import { VISIBILITY_FILTERS } from "../../constants";
 import { connect } from 'react-redux';
 import './single-todo.css';
 
-  const todos = [];
+const todos = [];
 
 class SingleTodo extends React.Component {
 
@@ -20,17 +20,37 @@ class SingleTodo extends React.Component {
 			image:''
 		}
 	}
+
+	shouldComponentUpdate = (nextProps, nextState) => {
+		if(nextProps.todo !== nextState.todo){
+
+			
+		}
+		return true;
+	}
+
 	componentDidMount= async()=>{
 		const req = await fetch(`http://aws.random.cat/meow`)
         const res = await req.json();
         this.setState({image:res.file})
-      
-        const todo = this.state.todo.content;
-        todos.push(todo)
-         const todos_json = JSON.stringify(todos);
-        localStorage.setItem("todos", todos_json)
 
+        /*set item to LocalStorage*/
+        const todo = this.state.todo.content;
+      	this.setTodoToLocalStorage(todo);
 	}
+	setTodoToLocalStorage = (todo) =>  {
+		todos.push(todo)
+        const todos_json = JSON.stringify(todos);
+        localStorage.setItem("todos", todos_json)
+	}
+	deleteItemToLocalStorage = (todoId) => {
+		const todos_json = JSON.parse(localStorage.getItem("todos"));
+		const indexOfTOdo = todoId - 1;
+		todos_json.splice(indexOfTOdo, 1 );
+		localStorage.setItem("todos", JSON.stringify(todos_json));
+	}
+
+
 	todoFilterVisible = (event) => {
 		event.preventDefault();
 		this.props.toggleTodo(this.state.todo.id)
@@ -58,6 +78,7 @@ class SingleTodo extends React.Component {
 	onDelete = (event) => {
 		event.preventDefault();
 		this.props.deleteTodo(this.state.todo);
+		this.deleteItemToLocalStorage(this.state.todo.id);
 	}
 	render() {
 		const isHide = this.state.isHide;

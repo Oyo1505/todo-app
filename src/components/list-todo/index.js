@@ -6,17 +6,7 @@ import {connect} from 'react-redux';
 
 class ListTodo extends React.Component{
 	
-
-	componentDidMount =()=>{
-
-		const todos_json = localStorage.getItem("todos");
-		if(todos_json !== null){
-			const todos = JSON.parse(todos_json);
-		
-		}
-	}
 	render(){
-
 		const todos = this.props.todos;
 		return(
 			<div>

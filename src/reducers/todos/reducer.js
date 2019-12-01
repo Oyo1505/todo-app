@@ -3,6 +3,7 @@ import initialState from '../initialState';
 
 
 export default function todosReducer(state = initialState, action) {
+
  switch (action.type) {
     case types.ADD_TODO_SUCCESS: {
      const { id, content } = action.payload;
